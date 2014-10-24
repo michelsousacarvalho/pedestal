@@ -10,12 +10,16 @@
 ;
 ; You must not remove this notice, or any other, from this software.
 
-(defproject io.pedestal/pedestal "0.3.2-SNAPSHOT"
-  :plugins [[lein-sub "0.2.3"]]
+(defproject io.pedestal/pedestal "0.3.2-NUBANK"
+  :plugins [[lein-sub "0.2.3"]
+            [s3-wagon-private "1.1.2"]]
   :sub ["service"
         "jetty"
         "immutant"
         "tomcat"
         "service-tools"
-        "service-template"])
+        "service-template"]
+  :repositories  [["nu-maven" {:url "s3p://nu-maven/releases/"
+                               :username [:gpg :env/artifacts_aws_access_key_id]
+                               :passphrase [:gpg :env/artifacts_aws_secret_access_key]}]])
 

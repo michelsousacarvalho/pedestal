@@ -10,7 +10,8 @@
 ;
 ; You must not remove this notice, or any other, from this software.
 
-(defproject io.pedestal/pedestal.jetty "0.3.2-SNAPSHOT"
+(defproject io.pedestal/pedestal.jetty "0.3.2-NUBANK"
+            :plugins [[s3-wagon-private "1.1.2"]]
   :description "Embedded Jetty adapter for Pedestal HTTP Service"
   :url "https://github.com/pedestal/pedestal"
   :scm "https://github.com/pedestal/pedestal"
@@ -21,5 +22,8 @@
                  [org.eclipse.jetty/jetty-servlet "9.2.0.v20140526"]
                  [javax.servlet/javax.servlet-api "3.1.0"]]
   :min-lein-version "2.0.0"
-  :global-vars {*warn-on-reflection* true})
+  :global-vars {*warn-on-reflection* true}
+  :repositories  [["nu-maven" {:url "s3p://nu-maven/releases/"
+                               :username [:gpg :env/artifacts_aws_access_key_id]
+                               :passphrase [:gpg :env/artifacts_aws_secret_access_key]}]])
 

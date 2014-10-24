@@ -10,7 +10,8 @@
 ;
 ; You must not remove this notice, or any other, from this software.
 
-(defproject io.pedestal/pedestal.service "0.3.2-SNAPSHOT"
+(defproject io.pedestal/pedestal.service "0.3.2-NUBANK"
+            :plugins [[s3-wagon-private "1.1.2" :exclusions [commons-logging commons-codec]]]
   :description "Pedestal Service"
   :url "https://github.com/pedestal/pedestal"
   :scm "https://github.com/pedestal/pedestal"
@@ -46,6 +47,9 @@
   :pedantic? :abort
   :aliases {"bench-log" ["trampoline" "run" "-m" "io.pedestal.log-bench"]
             "dumbrepl" ["trampoline" "run" "-m" "clojure.main/main"]}
+  :repositories  [["nu-maven" {:url "s3p://nu-maven/releases/"
+                               :username [:gpg :env/artifacts_aws_access_key_id]
+                               :passphrase [:gpg :env/artifacts_aws_secret_access_key]}]]
   :profiles {:default [:dev :provided :user :base]
              :provided
              {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]}
@@ -56,10 +60,10 @@
                              [org.clojure/java.classpath "0.2.2"]
                              [org.clojure/tools.namespace "0.2.4"]
                              [clj-http "0.9.1"]
-                             [io.pedestal/pedestal.jetty "0.3.2-SNAPSHOT"]
+                             [io.pedestal/pedestal.jetty "0.3.2-NUBANK"]
                              [org.eclipse.jetty/jetty-servlets "9.2.0.v20140526"]
-                             [io.pedestal/pedestal.immutant "0.3.2-SNAPSHOT"]
-                             [io.pedestal/pedestal.tomcat "0.3.2-SNAPSHOT"]
+                             [io.pedestal/pedestal.immutant "0.3.2-NUBANK"]
+                             [io.pedestal/pedestal.tomcat "0.3.2-NUBANK"]
                              [javax.servlet/javax.servlet-api "3.1.0"]
                              ;; Logging:
                              [ch.qos.logback/logback-classic "1.1.2" :exclusions [org.slf4j/slf4j-api]]
